@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bist du im Überlebensmodus?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://images.unsplash.com/photo-1563201517-6f6eddf6c757?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.7);
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #ffcc00;
+      text-align: center;
+    }
+    form {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 600px;
+      width: 100%;
+    }
+    .question {
+      margin-bottom: 25px;
+    }
+    .question p {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: #ffd;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    input[type="radio"] {
+      margin-right: 10px;
+    }
+    button {
+      background-color: #ff6600;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      border-radius: 6px;
+      width: 100%;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #e65c00;
+    }
+    #result {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #ffcc00;
+    }
+    .cta {
+      display: block;
+      margin-top: 30px;
+      text-align: center;
+      font-size: 1.2rem;
+      color: #ffcc00;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .cta:hover {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h1>Bist du im Überlebensmodus?</h1>
+    <form id="quizForm">
+      <div class="question">
+        <p>1. Funktionierst du mehr, als wirklich zu leben?</p>
+        <label><input type="radio" name="q1" value="3" /> Ja, fast ständig</label>
+        <label><input type="radio" name="q1" value="2" /> Ab und zu</label>
+        <label><input type="radio" name="q1" value="1" /> Kaum – ich lebe bewusst</label>
+      </div>
+      <div class="question">
+        <p>2. Wie fühlst du dich häufig?</p>
+        <label><input type="radio" name="q2" value="3" /> Erschöpft</label>
+        <label><input type="radio" name="q2" value="2" /> Ausgelaugt</label>
+        <label><input type="radio" name="q2" value="1" /> Energiegeladen</label>
+      </div>
+      <div class="question">
+        <p>3. Hast du das Gefühl, im Hamsterrad zu sein?</p>
+        <label><input type="radio" name="q3" value="3" /> Ja</label>
+        <label><input type="radio" name="q3" value="2" /> Teilweise</label>
+        <label><input type="radio" name="q3" value="1" /> Selten</label>
+      </div>
+      <button type="submit">Ergebnis anzeigen</button>
+      <div id="result"></div>
+    </form>
+
+    <a class="cta" href="https://www.erschaffe-dich-neu.at/ich-bin-genug-kampagne" target="_blank">
+      🌟 Ich bin genug – jetzt mit mir arbeiten
+    </a>
+  </div>
+
+  <script>
+    document.getElementById("quizForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+      let total = 0;
+      for (let i = 1; i <= 3; i++) {
+        const answer = document.querySelector(`input[name="q${i}"]:checked`);
+        if (!answer) {
+          alert("Bitte beantworte alle Fragen.");
+          return;
+        }
+        total += parseInt(answer.value);
+      }
+
+      const resultDiv = document.getElementById("result");
+      if (total >= 7) {
+        resultDiv.textContent = "⚠️ Du bist klar im Überlebensmodus.";
+      } else if (total >= 4) {
+        resultDiv.textContent = "😐 Du bist teilweise im Überlebensmodus.";
+      } else {
+        resultDiv.textContent = "🌱 Du lebst bewusst und im Flow – weiter so!";
+      }
+    });
+  </script>
+</body>
+</html>
